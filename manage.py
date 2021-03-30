@@ -1,4 +1,6 @@
-from main import app, db, User1, Post, Tag, migrate
+import os
+from webapp import db, migrate, create_app
+from webapp.blog.models import User1, Post, Tag
 
 @app.shell_context_processor
 def make_shell_context():
