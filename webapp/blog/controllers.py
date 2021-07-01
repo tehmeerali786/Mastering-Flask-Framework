@@ -6,7 +6,7 @@ from .forms import CommentForm
 blog_blueprint = Blueprint(
             'blog',
             __name__,
-            template_folder = 'templates/blog',
+            template_folder = '../templates/blog',
             url_prefix = "/blog"
 )
 
@@ -22,7 +22,7 @@ def sidebar_data():
 @blog_blueprint.route('/')
 @blog_blueprint.route('/<int:page>')
 def home(page=1):
-    posts = Post.query.order_by(Post.publish_date.desc()).paginate(page, app.config.get('POSTS_PER_PAGE', 10), False)
+    posts = Post.query.order_by(Post.publish_date.desc()).paginate(page, current_app.config.get('POSTS_PER_PAGE', 10), False)
     recent, top_tags = sidebar_data()
     return render_template('home.html', posts=posts, recent=recent, top_tags=top_tags)
 
